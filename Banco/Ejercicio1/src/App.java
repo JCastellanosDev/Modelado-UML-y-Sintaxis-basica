@@ -1,4 +1,4 @@
-import Separador.Separadores;
+import interfaces.Separadores;
 import cuenta.CuentaAhorro;
 import cuenta.CuentaBancaria;
 import cuenta.CuentaCorriente;
