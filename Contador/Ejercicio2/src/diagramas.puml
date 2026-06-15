@@ -1,0 +1,79 @@
+@startuml Contador
+
+title Ejercicio 2 - Contador (Interfaz y Polimorfismo)
+
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+    ArrowColor Black
+}
+
+interface Contable <<interface>> {
+    + cambiar() : void
+    + getValor() : int
+    + setValor(valor: int) : void
+}
+
+class Contador {
+    - contador : int
+    --
+    + Contador()
+    + Contador(contador: int)
+    + Contador(contador: Contador)
+    + getContador() : int
+    + setContador(contador: int) : void
+    ~ incrementar() : void
+    ~ decrementar() : void
+    + toString() : String
+}
+
+class ContadorAscendente {
+    - contador : int
+    --
+    + ContadorAscendente()
+    + ContadorAscendente(contador: int)
+    + ContadorAscendente(contador: ContadorAscendente)
+    + cambiar() : void
+    + getValor() : int
+    + setValor(valor: int) : void
+    + toString() : String
+}
+
+class ContadorDescendente {
+    - contador : int
+    --
+    + ContadorDescendente()
+    + ContadorDescendente(contador: int)
+    + ContadorDescendente(contador: ContadorDescendente)
+    + cambiar() : void
+    + getValor() : int
+    + setValor(valor: int) : void
+    + toString() : String
+}
+
+ContadorAscendente  ..|> Contable : implements
+ContadorDescendente ..|> Contable : implements
+
+note right of ContadorAscendente
+  cambiar(): incrementa el contador
+  (contador++)
+end note
+
+note right of ContadorDescendente
+  cambiar(): decrementa el contador
+  (no baja de 0)
+end note
+
+note bottom of Contador
+  Clase independiente (no implementa Contable).
+  Tiene métodos package-private: incrementar()
+  y decrementar().
+end note
+
+note bottom of Contable
+  Polimorfismo: App usa array Contable[]
+  y llama cambiar() sin saber el tipo real.
+end note
+
+@enduml

@@ -1,0 +1,99 @@
+@startuml Biblioteca
+
+title Ejercicio 3 - Biblioteca (Herencia, Clases Abstractas y Polimorfismo)
+
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+    ArrowColor Black
+}
+
+class Libro {
+    - titulo : String
+    - autor : String
+    - ejemplares : int
+    - prestados : int
+    --
+    + Libro()
+    + Libro(titulo: String, autor: String, ejemplares: int, prestados: int)
+    + Libro(libro: Libro)
+    + getTitulo() : String
+    + setTitulo(titulo: String) : void
+    + getAutor() : String
+    + setAutor(autor: String) : void
+    + getEjemplares() : int
+    + setEjemplares(ejemplares: int) : void
+    + getPrestados() : int
+    + setPrestados(prestados: int) : void
+    + prestamo() : boolean
+    + devolucion() : boolean
+    + toString() : String
+}
+
+abstract class LibroPoli {
+    # titulo : String
+    # autor : String
+    --
+    + LibroPoli()
+    + LibroPoli(titulo: String, autor: String)
+    + LibroPoli(libroPoli: LibroPoli)
+    + getTitulo() : String
+    + setTitulo(titulo: String) : void
+    + getAutor() : String
+    + setAutor(autor: String) : void
+    + {abstract} prestar() : boolean
+    + {abstract} devolver() : boolean
+    + toString() : String
+}
+
+class LibroFisico {
+    - ejemplaresTotales : int
+    - ejempalresPrestados : int
+    --
+    + LibroFisico(titulo: String, autor: String)
+    + LibroFisico(titulo: String, autor: String, ejemplaresTotales: int, ejempalresPrestados: int)
+    + LibroFisico(libroFisico: LibroFisico)
+    + prestar() : boolean
+    + devolver() : boolean
+    + toString() : String
+}
+
+class LibroDigital {
+    - usuariosActivos : int
+    - {static} LIMITE_SIMULTANEOS : int = 3
+    --
+    + LibroDigital(titulo: String, autor: String)
+    + LibroDigital(titulo: String, autor: String, usuariosActivos: int)
+    + LibroDigital(libro: LibroDigital)
+    + prestar() : boolean
+    + devolver() : boolean
+    + toString() : String
+}
+
+LibroFisico  --|> LibroPoli
+LibroDigital --|> LibroPoli
+
+note right of LibroFisico
+  prestar(): verifica ejemplaresTotales
+  devolver(): decrementa ejempalresPrestados
+end note
+
+note right of LibroDigital
+  prestar(): límite de 3 usuarios simultáneos
+  devolver(): decrementa usuariosActivos
+end note
+
+note bottom of Libro
+  Clase independiente (App.java).
+  Gestiona préstamos con ejemplares
+  físicos. No hereda de LibroPoli.
+end note
+
+note bottom of LibroPoli
+  AppPoli.java usa ArrayList<LibroPoli>
+  para aplicar polimorfismo con
+  prestar() y devolver().
+end note
+
+@enduml

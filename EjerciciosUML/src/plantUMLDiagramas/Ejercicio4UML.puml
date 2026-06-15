@@ -1,0 +1,27 @@
+@startuml
+
+class Pantalla{
++digitosIndicados(digitos String): void
+}
+
+class Receptor{
++tono(): void
+}
+class Teclado{
+}
+
+class Procesador{
+-digitos: String
++marcacionDeDigitos(char): void
++botonEnviar(): void
+}
+class Red{
++emparejamientoRed(numero: String) boolean
+}
+
+Procesador --> Pantalla : controla
+Procesador --> Receptor : acciona
+Teclado--> Procesador : EnvioEventos
+Procesador --> Red : Conecta
+
+@enduml

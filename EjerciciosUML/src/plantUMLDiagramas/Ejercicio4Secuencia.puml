@@ -1,0 +1,47 @@
+@startuml
+title Diagrama secuencial de llamada
+
+
+actor Usuario
+
+participant ":Teclado" as Teclado
+participant ":Procesador" as Procesador
+participant ":Pantalla" as Pantalla
+participant ":Receptor" as Receptor
+participant ":Red" as Red
+
+loop Para cada dígito
+    Usuario -> Teclado : pulsaDígito(char)
+    Teclado -> Procesador : EnvioEventos(char)
+    activate Procesador
+
+    Procesador -> Procesador : marcacionDeDigitos(char)
+    note right: Acumula el dígito\nen la variable interna
+
+    Procesador -> Pantalla : digitosIndicados(digitos)
+    activate Pantalla
+    deactivate Pantalla
+
+    Procesador -> Receptor : tono()
+    activate Receptor
+    deactivate Receptor
+    deactivate Procesador
+end
+
+Usuario -> Teclado : pulsaBotónEnviar()
+Teclado -> Procesador : EnvioEventos("Enviar")
+activate Procesador
+
+Procesador -> Procesador : botonEnviar()
+
+Procesador -> Red : emparejamientoRed(digitos)
+activate Red
+
+Red -> Red : conectarConNumero()
+Red --> Procesador : true (Conectado)
+deactivate Red
+
+Procesador --> Usuario : llamadaEstablecida()
+deactivate Procesador
+
+@enduml

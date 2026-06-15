@@ -1,0 +1,75 @@
+@startuml Complejo
+
+title Ejercicio 4 - Números Complejos y Racionales (Interfaz y Polimorfismo)
+
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+    ArrowColor Black
+}
+
+interface Operable <<interface>> {
+    + sumar(otro: Operable) : Operable
+    + toString() : String
+}
+
+class Complejo {
+    - pReal : double
+    - pImag : double
+    --
+    + Complejo()
+    + Complejo(pReal: double, pImag: double)
+    + Complejo(complejo: Complejo)
+    + getpReal() : double
+    + setpReal(pReal: double) : void
+    + getpImag() : double
+    + setpImag(pImag: double) : void
+    + asignar(real: double, imag: double) : void
+    + sumar(otro: Operable) : Operable
+    + toString() : String
+}
+
+class Racional {
+    - numerador : int
+    - denominador : int
+    --
+    + Racional()
+    + Racional(numerador: int, denominador: int)
+    + Racional(otrito: Racional)
+    + getNumerador() : int
+    + setNumerador(numerador: int) : void
+    + getDenominador() : int
+    + setDenominador(denominador: int) : void
+    + asignar(numerador: int, denominador: int) : void
+    - mcd(a: int, b: int) : int
+    - simplificar() : void
+    + sumar(otro: Operable) : Operable
+    + toString() : String
+}
+
+Complejo ..|> Operable : implements
+Racional ..|> Operable : implements
+
+note right of Complejo
+  sumar(): solo acepta otro Complejo.
+  Lanza IllegalArgumentException si
+  se intenta sumar con Racional.
+  Formato: "a + bi" o "a - bi"
+end note
+
+note right of Racional
+  sumar(): solo acepta otro Racional.
+  Aplica MCD para simplificar resultado.
+  Constructor normaliza el signo del
+  denominador y simplifica la fracción.
+end note
+
+note bottom of Operable
+  Polimorfismo: App usa Operable[]
+  para almacenar Complejo y Racional.
+  sumar() se resuelve en tiempo de ejecución
+  según el tipo real del objeto.
+end note
+
+@enduml

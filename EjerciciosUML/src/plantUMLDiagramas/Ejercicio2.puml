@@ -1,0 +1,66 @@
+@startuml
+
+title Ejercicio2 biblioteca
+
+class Autor{
+-nombre: String
+-nacionalidad: String
+-fechaNacimiento: Date
+
+}
+
+class Libro{
+-nombre: String
+-tipo: TipoLibro
+-editorial:String
+-ano:Integer
+}
+
+class Copia{
+-identificarod:String
+-estado:EstadoCopia
+}
+
+class Lector{
+-idLector: String
+-nombre
+-diasMulta: Integer
++PrestamoPermitido(): boolean
++Multa(retraso: int): void
+}
+
+class Prestado{
+-fechaEntregaM: Date
+-fechaDevR: Date
+-fechaSalida: Date
++calcularRetraso()Integer
+}
+
+enum TipoLibro{
+NOVELA
+TEATRO
+POESIA
+ENSAYO
+}
+
+enum EstadoCopia{
+BIBLIOTECA
+PRESTADA
+RETRASO
+REPARACION
+}
+
+class GestionBi{
++rePrestamo(lector: Lector, copia: Copia): boolean
++reDevolucion(copia: Copia): void
+}
+
+GestionBi ..> Prestado: maneja
+
+Autor <-- Libro : escribe <
+Libro *-- Copia : tiene <
+
+Lector --  Prestado : realiza >
+Copia --  Prestado : se asigna a <
+
+@enduml

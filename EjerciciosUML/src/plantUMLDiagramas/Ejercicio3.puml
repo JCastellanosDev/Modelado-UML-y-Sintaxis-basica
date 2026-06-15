@@ -1,0 +1,56 @@
+@startuml
+
+
+class Autor{
+-nombre:String
+-nacionalidad: String
+-fechaNa: Date
+}
+
+class Libro{
+-nombre: String
+-editorial: String
+-ano: Integer
+-tipo: Tipo libro
+
+}
+
+class Copia{
+-identificador: String
+-estado: EstadoCopia
+}
+
+class Lector{
+-lectorID: String
+-nombre: String
+-diasDeMulta: Integer
+}
+
+class Prestado{
+-fechaSalida:Date
+-fechaEntrega: Date
+-fechaDevolucion: Date
+}
+
+enum TipoLibro{
+NOVELA
+TEATRO
+POESIA
+ENSAYO
+}
+
+enum EstadoCopia{
+BIBLIOTECA
+PRESTADA
+RESERVADA
+RETRASO
+REPARACION
+}
+
+Autor <-- Libro
+Libro *-- Copia
+Lector -- Prestado
+Copia -- Prestado
+
+
+@enduml

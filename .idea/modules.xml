@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Banco/Banco.iml" filepath="$PROJECT_DIR$/Banco/Banco.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Biblioteca/Biblioteca.iml" filepath="$PROJECT_DIR$/Biblioteca/Biblioteca.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Contador/Contador.iml" filepath="$PROJECT_DIR$/Contador/Contador.iml" />
+      <module fileurl="file://$PROJECT_DIR$/complejo/complejo.iml" filepath="$PROJECT_DIR$/complejo/complejo.iml" />
+    </modules>
+  </component>
+</project>

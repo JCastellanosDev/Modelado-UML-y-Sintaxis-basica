@@ -1,0 +1,71 @@
+@startuml Banco
+
+title Ejercicio 1 - Banco (Herencia y Polimorfismo)
+
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+    ArrowColor Black
+}
+
+interface Separadores <<interface>> {
+    + {static} SEPARADOR : String
+}
+
+abstract class CuentaBancaria {
+    - nombreCliente : String
+    - numeroCuenta : String
+    - saldo : double
+    - tipoInteres : double
+    --
+    + CuentaBancaria()
+    + CuentaBancaria(nombreCliente: String, numeroCuenta: String, tipoInteres: double, saldo: double)
+    + CuentaBancaria(cuentaBancaria: CuentaBancaria)
+    + getNombreCliente() : String
+    + setNombreCliente(nombreCliente: String) : void
+    + getNumeroCuenta() : String
+    + setNumeroCuenta(numeroCuenta: String) : void
+    + getSaldo() : double
+    + setSaldo(saldo: double) : void
+    + getTipoInteres() : double
+    + setTipoInteres(tipoInteres: double) : void
+    + {abstract} ingreso(valor: double) : boolean
+    + {abstract} reintegro(valor: double) : boolean
+    + transferencia(cuentaBancariaDestino: CuentaBancaria, importe: double) : boolean
+}
+
+class CuentaAhorro {
+    --
+    + CuentaAhorro(nombreCliente: String, numeroCuenta: String, tipoInteres: double, saldo: double)
+    + ingreso(valor: double) : boolean
+    + reintegro(valor: double) : boolean
+}
+
+class CuentaCorriente {
+    - {static} COMISION : double = 0.5
+    --
+    + CuentaCorriente(nombreCliente: String, numeroCuenta: String, tipoInteres: double, saldo: double)
+    + ingreso(valor: double) : boolean
+    + reintegro(valor: double) : boolean
+}
+
+CuentaAhorro    --|> CuentaBancaria
+CuentaCorriente --|> CuentaBancaria
+
+note right of CuentaAhorro
+  ingreso: aplica bonificación del 10%
+  reintegro: verifica saldo suficiente
+end note
+
+note right of CuentaCorriente
+  reintegro: descuenta comisión fija de 0.5
+end note
+
+note bottom of CuentaBancaria
+  transferencia() usa polimorfismo:
+  llama a reintegro() e ingreso()
+  del tipo real en tiempo de ejecución
+end note
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+title Ejercicio 1 de empresa
+
+abstract class Persona{
+-nombre: String
+-edad: Integer
++mostrarDatos():void
+}
+
+class Empleado{
+-sueldoBruto:double
++mostrarDatos():void
+}
+
+class Directivo{
+-categoria: String
+}
+
+class Cliente{
+-telefonoContacto: String
++mostrarDatos():void
+}
+
+class Empresa{
+-nombre: String
++MostrarInformacion(): void
+}
+
+
+Persona <|-- Empleado
+Persona <|-- Cliente
+Empleado <|-- Directivo
+
+
+Empresa *--  Empleado : emplea >
+Empresa  *--  Cliente : tiene >
+Directivo -->  Empleado : supervisa >
+
+@enduml
