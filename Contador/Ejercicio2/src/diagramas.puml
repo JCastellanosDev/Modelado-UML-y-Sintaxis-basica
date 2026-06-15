@@ -2,12 +2,7 @@
 
 title Ejercicio 2 - Contador (Interfaz y Polimorfismo)
 
-skinparam classAttributeIconSize 0
-skinparam class {
-    BackgroundColor White
-    BorderColor Black
-    ArrowColor Black
-}
+
 
 interface Contable <<interface>> {
     + cambiar() : void

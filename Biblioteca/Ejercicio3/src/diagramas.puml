@@ -2,12 +2,7 @@
 
 title Ejercicio 3 - Biblioteca (Herencia, Clases Abstractas y Polimorfismo)
 
-skinparam classAttributeIconSize 0
-skinparam class {
-    BackgroundColor White
-    BorderColor Black
-    ArrowColor Black
-}
+
 
 class Libro {
     - titulo : String

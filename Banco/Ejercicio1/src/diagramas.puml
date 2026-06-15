@@ -2,22 +2,17 @@
 
 title Ejercicio 1 - Banco (Herencia y Polimorfismo)
 
-skinparam classAttributeIconSize 0
-skinparam class {
-    BackgroundColor White
-    BorderColor Black
-    ArrowColor Black
-}
+
 
 interface Separadores <<interface>> {
-    + {static} SEPARADOR : String
+    +{static} SEPARADOR : String
 }
 
 abstract class CuentaBancaria {
-    - nombreCliente : String
-    - numeroCuenta : String
-    - saldo : double
-    - tipoInteres : double
+    -nombreCliente : String
+    -numeroCuenta : String
+    -saldo : double
+    -tipoInteres : double
     --
     + CuentaBancaria()
     + CuentaBancaria(nombreCliente: String, numeroCuenta: String, tipoInteres: double, saldo: double)
